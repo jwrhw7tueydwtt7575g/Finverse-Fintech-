@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "site": "arealis-magnus-client",
+      "source": "apps/client-portal",
+      "frameworksBackend": {
+        "region": "us-central1"
+      }
+    },
+    {
+      "site": "arealis-magnus",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      }
+    }
+  ]
+}
+

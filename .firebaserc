@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "arealis-magnus"
+  },
+  "targets": {
+    "arealis-magnus": {
+      "hosting": {
+        "client-portal": [
+          "arealis-magnus-client"
+        ],
+        "core-dashboard": [
+          "arealis-magnus"
+        ]
+      }
+    }
+  }
+}
+
