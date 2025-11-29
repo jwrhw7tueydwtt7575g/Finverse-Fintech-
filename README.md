@@ -232,6 +232,20 @@ arealis-magnus-dashboard/
 - Auth with `firebase login`.
 - Deploy using the workflow documented in `apps/client-portal/README.md`.
 
+### GitHub Actions → Firebase Hosting (CI/CD)
+- This repo includes `.github/workflows/client-portal.yml`, wired to build and deploy the client portal to Firebase Hosting on pushes to `main` that touch `apps/client-portal/**/*`.
+- Configure repository secrets in GitHub:
+  - `FIREBASE_SERVICE_ACCOUNT` (JSON credentials for a Firebase service account with Hosting Admin roles) **or** `FIREBASE_TOKEN` generated via `firebase login:ci`.
+  - `FIREBASE_PROJECT_ID` pointing to your target Firebase project.
+- Optional environment secrets:
+  - `NEXT_PUBLIC_API_BASE_URL` (propagated through the build step).
+- Workflow stages:
+  1. Checkout source and set up Node (uses the matrix version defined in the workflow).
+  2. Install dependencies with `npm ci` inside `apps/client-portal`.
+  3. Run quality gates (`npm run lint` and `npm run build`).
+  4. Deploy to Firebase Hosting using `firebase deploy --only hosting --project $FIREBASE_PROJECT_ID`.
+- Adjust triggers or add additional jobs (e.g., dashboard deploy) by extending the workflow or creating a new one under `.github/workflows`.
+
 ## Troubleshooting
 
 - **`ModuleNotFoundError: No module named 'app'` in tests**  
